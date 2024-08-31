@@ -1,6 +1,7 @@
 import json
 import sys
 import bencodepy
+import hashlib
 
 # import requests - available if you need it!
 # Examples:
@@ -59,8 +60,10 @@ def main():
         with open(sys.argv[2], "rb") as f:
             data = f.read()
             parsed = decode_bencode(data)
+            info_hash = hashlib.sha1(bencodepy.encode(parsed["info"])).hexdigest()
             print("Tracker URL:", parsed["announce"])
             print("Length:", parsed["info"]["length"])
+            print(f"Info Hash:{info_hash}")
     else:
         raise NotImplementedError(f"Unknown command {command}")
 
