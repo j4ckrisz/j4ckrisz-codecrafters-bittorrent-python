@@ -1,14 +1,17 @@
 import json
 import sys
+import bencodepy
 
-# import bencodepy - available if you need it!
 # import requests - available if you need it!
-
 # Examples:
 #
 # - decode_bencode(b"5:hello") -> b"hello"
 # - decode_bencode(b"10:hello12345") -> b"hello12345"
+
 def decode_bencode(bencoded_value):
+
+
+    return bencodepy.decode(bencoded_value)
 
     if chr(bencoded_value[0]).isdigit():
     
@@ -25,7 +28,6 @@ def decode_bencode(bencoded_value):
     else:
     
         raise NotImplementedError("Only strings are supported at the moment")
-
 
 def main():
     command = sys.argv[1]
