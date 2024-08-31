@@ -8,7 +8,11 @@ import bencodepy
 # - decode_bencode(b"5:hello") -> b"hello"
 # - decode_bencode(b"10:hello12345") -> b"hello12345"
 
-bc = bencodepy.Bencode(encoding="utf-8")
+bc = bencodepy.Bencode(
+    encoding="utf-8",
+    encoding_fallback='value',
+    dict_ordered=True,
+    dict_ordered_sort=True )
 
 
 def decode_bencode(bencoded_value):
@@ -35,6 +39,7 @@ def decode_bencode(bencoded_value):
 def main():
     command = sys.argv[1]
 
+
     if command == "decode":
         bencoded_value = sys.argv[2].encode()
 
@@ -50,6 +55,12 @@ def main():
 
         print(json.dumps(decode_bencode(bencoded_value), default=bytes_to_str))
 
+    elif command == "info":
+        with open(sys.argv[2], "rb") as f:
+            data = f.read()
+            parsed = decode_bencode(data)
+            print("Tracker URL:", parsed["announce"].encode("utf-8"))
+            print("Length:", parsed["info"]["length"])
     else:
         raise NotImplementedError(f"Unknown command {command}")
 
