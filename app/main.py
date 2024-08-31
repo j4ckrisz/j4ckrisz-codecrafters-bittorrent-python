@@ -64,6 +64,14 @@ def main():
             print("Tracker URL:", parsed["announce"])
             print("Length:", parsed["info"]["length"])
             print(f"Info Hash: {info_hash}")
+            print("Piece Length:", parsed["info"]["piece length"])
+            print("Piece Hashes: ", )
+
+            for i in range(0, len(parsed["info"]["pieces"]), 20):
+                print(parsed["info"]["pieces"][i : i + 20].hex())
+
+
+
     else:
         raise NotImplementedError(f"Unknown command {command}")
 
