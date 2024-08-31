@@ -61,8 +61,8 @@ def main():
             data = f.read()
             parsed = decode_bencode(data)
             info_hash = hashlib.sha1(bencodepy.encode(parsed["info"])).hexdigest()
-            #print("Tracker URL:", parsed["announce"])
-            #print("Length:", parsed["info"]["length"])
+            print("Tracker URL:", parsed["announce"])
+            print("Length:", parsed["info"]["length"])
             print(f"Info Hash: {info_hash}")
     else:
         raise NotImplementedError(f"Unknown command {command}")
