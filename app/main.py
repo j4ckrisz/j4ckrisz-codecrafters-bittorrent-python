@@ -60,7 +60,7 @@ def main():
             data = f.read()
             parsed = decode_bencode(data)
             print("Tracker URL:", parsed["announce"])
-#            print("Length:", parsed["info"]["length"])
+            print("Length:", parsed["info"]["length"])
     else:
         raise NotImplementedError(f"Unknown command {command}")
 
